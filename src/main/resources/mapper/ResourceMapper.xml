@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monitor.mapper.ResourceMapper">
+
+	<resultMap type="com.monitor.entity.Resource" id="RESOURCE_RESULT_MAP">
+		<id column="VI_ID" property="vId"/>
+		<result column="VI_PIC" property="vPic"/>
+		<result column="VI_TITLE" property="vTitle"/>	
+		<result column="VI_NAME" property="vName"/>
+		<result column="VI_INTRODUCE" property="vIntroduce"/>
+		<result column="INTIME" property="inTime"/>
+		<result column="ISDEL" property="isDel"/>
+		<result column="DISCOMMENT" property="disComment"/>
+		<result column="V_TOP_ID" property="vTopId" />
+		<result column="V_TOP_NAME" property="vTopName"/>
+		<result column="V_SEC_ID" property="vSecId"/>
+		<result column="V_SEC_NAME" property="vSecName"/>
+	</resultMap>
+
+	<resultMap type="com.monitor.entity.ResourceDetail" id="RESOURCE_DETAIL_RESULT">
+		<id column="VI_ID" property="vId"/>
+		<result column="VI_TITLE" property="vTitle"/>	
+		<result column="VI_NAME" property="vName"/>
+		<result column="VI_PIC" property="vPic"/>
+		<result column="VI_INTRODUCE" property="vIntroduce"/>
+		<result column="PLAY_COUNTS" property="playCounts"/>
+		<result column="DURATION" property="duration"/>
+		<result column="FABULOUS_COUNTS" property="fabulousCounts"/>
+		<result column="ISDEL" property="isDel"/>
+		<result column="DISCOMMENT" property="disComment"/>
+		<result column="INTIME" property="inTime"/>
+		
+		<result column="V_TOP_ID" property="vTopId" />
+		<result column="V_TOP_NAME" property="vTopName"/>
+		<result column="V_SEC_ID" property="vSecId"/>
+		<result column="V_SEC_NAME" property="vSecName"/>
+	
+	</resultMap>
+
+	<select id="selectResourceByKeywords" parameterType="Map" resultMap="RESOURCE_RESULT_MAP">
+		SELECT
+			video.VI_ID,
+			video.VI_TITLE,
+			video.VI_NAME,
+			video.VI_PIC,
+			video.VI_INTRODUCE,
+			video.INTIME,
+			video.DISCOMMENT,
+			video.ISDEL,
+			
+			top.V_TOP_ID,
+			top.V_TOP_NAME,
+			
+			sec.V_SEC_ID,
+			sec.V_SEC_NAME
+			
+		FROM
+			v_video_info video
+		LEFT JOIN v_sec_category sec ON sec.V_SEC_ID = video.V_SEC_ID
+		LEFT JOIN v_top_category top ON top.V_TOP_ID = sec.V_TOP_ID
+		<where>
+			<if test="mId != null">
+				video.M_ID = #{mId}
+			</if>
+			<if test="vTopId != null">
+				AND top.V_TOP_ID = #{vTopId}
+			</if>
+			<if test="vSecId != null">
+				AND sec.V_SEC_ID = #{vSecId}
+			</if>
+			<if test="keywords != null and keywords != ''">
+				AND (
+					video.VI_TITLE like '%${keywords}%'
+					OR 
+					video.VI_NAME like '%${keywords}%'
+					OR
+					video.VI_INTRODUCE like '%${keywords}%'
+				)
+			</if>
+			AND video.ISDEL = 0
+		</where>
+		ORDER BY video.INTIME DESC
+		limit #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="selectResourceByKeywordsCount" parameterType="Map" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			v_video_info video
+		LEFT JOIN v_sec_category sec ON sec.V_SEC_ID = video.V_SEC_ID
+		LEFT JOIN v_top_category top ON top.V_TOP_ID = sec.V_TOP_ID
+		<where>
+			<if test="mId != null">
+				video.M_ID = #{mId}
+			</if>
+			<if test="vTopId != null">
+				AND top.V_TOP_ID = #{vTopId}
+			</if>
+			<if test="vSecId != null">
+				AND sec.V_SEC_ID = #{vSecId}
+			</if>
+			<if test="keywords != null and keywords != ''">
+				AND (
+					video.VI_TITLE like '%${keywords}%'
+					OR 
+					video.VI_NAME like '%${keywords}%'
+					OR
+					video.VI_INTRODUCE like '%${keywords}%'
+				)
+			</if>
+			AND video.ISDEL = 0
+		</where>
+	</select>
+	
+	<select id="selectResourceById" parameterType="Map" resultMap="RESOURCE_DETAIL_RESULT">
+		SELECT
+			video.VI_ID,
+			video.VI_TITLE,
+			video.VI_NAME,
+			video.VI_PIC,
+			video.VI_INTRODUCE,
+			video.PLAY_COUNTS,
+			video.DURATION,
+			video.FABULOUS_COUNTS,
+			video.ISDEL,
+			video.DISCOMMENT,
+			video.INTIME,
+			
+			top.V_TOP_ID,
+			top.V_TOP_NAME,
+			sec.V_SEC_ID,
+			sec.V_SEC_NAME
+		FROM
+			v_video_info video
+		LEFT JOIN v_sec_category sec ON sec.V_SEC_ID = video.V_SEC_ID
+		LEFT JOIN v_top_category top ON top.V_TOP_ID = sec.V_TOP_ID
+		<where>
+			<if test="vId != null">
+				video.VI_ID = #{vId,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insertResource" parameterType="com.monitor.entity.vo.ResourceParam">
+		INSERT INTO v_video_info 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="vId != null">
+				VI_ID,
+			</if>
+			<if test="vTitle != null and vTitle != ''">
+				VI_TITLE,
+			</if>
+			<if test="vName != null and vName != ''">
+				VI_NAME,
+			</if>
+			<if test="vPic != null and vPic != ''">
+				VI_PIC,
+			</if>
+			<if test="vIntroduce != null and vIntroduce != ''">
+				VI_INTRODUCE,
+			</if>
+			<if test="vPath != null and vPath != ''">
+				VI_PATH,
+			</if>
+			<if test="playCounts != null">
+				PLAY_COUNTS,
+			</if>
+			<if test="duration != null">
+				DURATION,
+			</if>
+			<if test="fabulousCounts != null">
+				FABULOUS_COUNTS,
+			</if>
+			<if test="isDel != null">
+				ISDEL,
+			</if>
+			<if test="disComment != null">
+				DISCOMMENT,
+			</if>
+			<if test="inTime != null">
+				INTIME,
+			</if>
+			<if test="vSecId != null">
+				V_SEC_ID,
+			</if>
+			<if test="mId != null">
+				M_ID
+			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="vId != null">
+				#{vId},
+			</if>
+			<if test="vTitle != null and vTitle != ''">
+				#{vTitle},
+			</if>
+			<if test="vName != null and vName != ''">
+				#{vName},
+			</if>
+			<if test="vPic != null and vPic != ''">
+				#{vPic},
+			</if>
+			<if test="vIntroduce != null and vIntroduce != ''">
+				#{vIntroduce},
+			</if>
+			<if test="vPath != null and vPath != ''">
+				#{vPath},
+			</if>
+			<if test="playCounts != null">
+				#{playCounts},
+			</if>
+			<if test="duration != null">
+				#{duration},
+			</if>
+			<if test="fabulousCounts != null">
+				#{fabulousCounts},
+			</if>
+			<if test="isDel != null">
+				#{isDel},
+			</if>
+			<if test="disComment != null">
+				#{disComment},
+			</if>
+			<if test="inTime != null">
+				#{inTime},
+			</if>
+			<if test="vSecId != null">
+				#{vSecId},
+			</if>
+			<if test="mId != null">
+				#{mId}
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateResourceById" parameterType="Map">
+		UPDATE v_video_info
+		<trim prefix="SET " suffix="" suffixOverrides=",">
+			<if test="vTitile != null and vTitile != ''">
+				 VI_TITLE = #{vTitile},
+			</if>
+			<if test="vName != null and vName != ''">
+				 VI_NAME = #{vName},
+			</if>
+			<if test="vPic != null and vPic != ''">
+				 VI_PIC = #{vPic},
+			</if>
+			<if test="vIntroduce != null and vIntroduce != ''">
+				 VI_INTRODUCE = #{vIntroduce},
+			</if>
+			<if test="vPath != null and vPath != ''">
+				 VI_PATH = #{vPath},
+			</if>
+			<if test="playCounts != null ">
+				PLAY_COUNTS =  #{playCounts},
+			</if>
+			<if test="duration != null">
+				 DURATION = #{duration},
+			</if>
+			<if test="fabulousCounts != null">
+				 FABULOUS_COUNTS = #{fabulousCounts},
+			</if>
+			<if test="isDel != null">
+				 ISDEL = #{isDel},
+			</if>
+			<if test="vSecId != null">
+				 V_SEC_ID = #{vSecId},
+			</if>
+			<if test="mId != null">
+				 M_ID = #{mId},
+			</if>
+			<if test="inTime != null">
+				INTIME = #{inTime},
+			</if>
+			<if test="disComment != null">
+				DISCOMMENT = #{disComment}
+			</if>
+		</trim>
+		<where>
+			<if test="vId != null">
+				VI_ID = #{vId}
+			</if>
+		</where>
+	</update>
+
+</mapper>
+
+
+

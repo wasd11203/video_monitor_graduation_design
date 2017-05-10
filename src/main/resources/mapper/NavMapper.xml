@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monitor.mapper.NavMapper">
+
+	
+	<resultMap type="com.monitor.entity.nav.SecNav" id="SEC_RESULT_MAP">
+		<id column="V_SEC_ID" property="vSecId"/>
+		<result column="V_SEC_NAME" property="vSecName"/>
+	</resultMap>
+	
+	<resultMap type="com.monitor.entity.nav.TopNav" id="TOP_RESULT_MAP">
+		<id column="V_TOP_ID" property="vTopId"/>
+		<result column="V_TOP_NAME" property="vTopName"/>
+		<collection property="secList" resultMap="SEC_RESULT_MAP"></collection>
+	</resultMap>
+
+
+	<select id="selectNav" resultMap="TOP_RESULT_MAP">
+		SELECT
+		top.V_TOP_ID,
+		top.V_TOP_NAME,
+		sec.V_SEC_ID,
+		sec.V_SEC_NAME
+		FROM
+		v_top_category top 
+		LEFT JOIN v_sec_category sec ON top.V_TOP_ID = sec.V_TOP_ID
+	</select>
+
+</mapper>
+
+
+

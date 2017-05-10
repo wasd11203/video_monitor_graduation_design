@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>微show--管理者平台</title>
+		
+		<link rel="shortcut icon" href="short-icon.ico"
+			type="image/vnd.microsoft.icon">
+		<link rel="icon" href="short-icon.ico" type="image/vnd.microsoft.icon">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<!-- bower:css start -->
+		<link href="static/bower_components/bootstrap/dist/css/bootstrap.css"
+			rel="stylesheet" type="text/css" />
+			
+		<!-- end bower:css -->
+		
+		<!-- build:css(.tmp) static/styles/visitor/*.css start-->
+		<link href="static/javascript/directives/paginate.css" rel='stylesheet' type='text/css'/>
+		
+		<!-- end build:css(.tmp) static/styles/visitor/*.css -->
+	</head>
+	
+	<body ng-app="monitor">
+	
+		<div class="container-fluid">
+			
+			<div class="row clearfix">
+				<div style="height:80px;">头部</div>
+			</div>
+			
+			<div class="row clearfix" ui-view="maincontent">
+				
+			</div>
+		
+			<!-- footer -->
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<label class="label label-default center-block">@copyright
+					2017-05-01</label>
+				</div>
+			</div>
+			<!-- //footer -->
+		</div>
+	</body>
+	
+	<!-- bower:js start-->
+	<script src="static/bower_components/jquery/dist/jquery.js"
+		type="text/javascript"></script>
+	<script src="static/bower_components/angular/angular.js"></script>
+	<script src="static/bower_components/angular-animate/angular-animate.js"></script>
+	<script
+		src="static/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="static/bower_components/angular-cookies/angular-cookies.js"></script>
+	<script
+		src="static/bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+	<script
+		src="static/bower_components/angular-loading-bar/build/loading-bar.js"></script>
+	<script
+		src="static/bower_components/angular-resource/angular-resource.js"></script>
+	<script
+		src="static/bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script
+		src="static/bower_components/angular-smart-table/dist/smart-table.js"></script>
+	<script
+		src="static/bower_components/angular-ueditor/dist/angular-ueditor.js"></script>
+	<script
+		src="static/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script
+		src="static/bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+	<script src="static/bower_components/blueimp-md5/js/md5.js"></script>
+	<script src="static/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="static/bower_components/lodash/lodash.js"></script>
+	<script src="static/bower_components/ng-file-upload/ng-file-upload.js"></script>
+	<script
+		src="static/bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+	<script src="static/bower_components/ng-dialog/js/ngDialog.js"></script>
+	<script
+		src="static/bower_components/angular-ui-notification/dist/angular-ui-notification.js"></script>
+	<script
+		src="static/bower_components/angular-locale_zh-cn-master/angular-locale_zh-cn.js"></script>
+	
+	<script
+		src="static/bower_components/lightbox2-master/dist/js/lightbox.js"></script>
+	<script src="static/bower_components/modernizr/modernizr-custom.js"
+		type="text/javascript"></script>
+	<script
+		src="static/bower_components/magnific-popup/dist/jquery.magnific-popup.js"
+		type="text/javascript"></script>
+	
+	<!-- end bower:js -->
+	
+	<!-- build:js({.tmp,app}) static/scripts/scripts.js start-->
+	<script src="static/javascript/app.js" type="text/javascript"></script>
+	
+	<script src="static/javascript/services/commonservice.js"
+		type="text/javascript"></script>
+	
+	<script src="static/javascript/directives/tm.pagination.js"
+		type="text/javascript"></script>
+	
+	<!-- Controller start -->
+	<script type="text/javascript" src="static/javascript/constants.js"></script>
+	<script type="text/javascript" src="static/javascript/controller/maincontent.js"></script>
+	<script type="text/javascript" src="static/javascript/controller/nav-controller.js"></script>
+	<script type="text/javascript" src="static/javascript/controller/hello-controller.js"></script>
+	<script type="text/javascript" src="static/javascript/controller/detail-controller.js"></script>
+	<script type="text/javascript" src="static/javascript/controller/video-manager-controller.js"></script>
+	<script type="text/javascript" src="static/javascript/controller/video-upload-controller.js"></script>
+	<!-- Controller end -->
+	<!-- end build:js({.tmp,app}) static/scripts/scripts.js -->
+
+</html>

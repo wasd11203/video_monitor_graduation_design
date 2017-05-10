@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monitor.mapper.ManagerMapper">
+
+	<resultMap type="com.monitor.entity.ManagerUserDetail" id="MANAGER_DETAIL_RESULT">
+		<id column="M_ID" property="mId"/>
+		<result column="M_NICKNAME" property="mNickname"/>
+		<result column="M_NAME" property="mName"/>
+		<result column="M_PHONE" property="mPhone"/>
+		<result column="M_PASSWORD" property="mPassword"/>
+		<result column="M_PIC" property="mPic"/>
+	</resultMap>
+	
+	<resultMap type="com.monitor.security.entity.ManagerUser" id="MANAGER_RESULT">
+		<id column="M_ID" property="mId"/>
+		<result column="M_NICKNAME" property="mNickname"/>
+		<result column="M_PASSWORD" property="mPassword"/>
+	</resultMap>
+
+	<select id="selectManagerUserDetailById" parameterType="Map" resultMap="MANAGER_DETAIL_RESULT">
+		SELECT
+			M_ID,
+			M_NICKNAME,
+			M_NAME,
+			M_PHONE,
+			M_PASSWORD,
+			M_PIC
+		FROM
+			v_manager
+		<where>
+			<if test="mId != null">
+				M_ID = #{mId}
+			</if>
+		</where>
+	</select>
+	
+	<update id="updateManagerUserInfoById" parameterType="com.monitor.entity.ManagerUserDetail">
+		
+		UPDATE v_manager 
+		<trim prefix="SET " suffix="" suffixOverrides=",">
+			<if test="mNickname != null and mNickname != ''">
+				M_NICKNAME = #{mNickname},
+			</if>
+			<if test="mName != null and mName != ''">
+				M_NAME = #{mName},
+			</if>
+			<if test="mPhone != null and mPhone != ''">
+				M_PHONE = #{mPhone},
+			</if>
+			<if test="mPassword != null and mPassword != ''">
+				M_PASSWORD = #{mPassword},
+			</if>
+			<if test="mPic != null and mPic != ''">
+				M_PIC = #{mPic},
+			</if>
+		</trim>
+		<where>
+			<if test="mId != null">
+				M_ID = #{mId}
+			</if>
+		</where>
+	</update>
+
+	<select id="selectManagerUserByNickname" parameterType="Map" resultMap="MANAGER_RESULT">
+		SELECT
+			M_ID,
+			M_NICKNAME,
+			M_PASSWORD
+		FROM
+			v_manager
+		<where>
+			<if test="username != null and username != ''">
+				M_NICKNAME = #{username}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectManagerUserCountByNickname" parameterType="Map" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			v_manager
+		<where>
+			<if test="username != null and username != ''">
+				M_NICKNAME = #{username}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>
+
+
+
