@@ -11,8 +11,9 @@
 angular.module(
 		'monitor',
 		[
-				'ngResource', 'smart-table', 'ui.tree', 'ngDialog', 'angular-loading-bar', 'http-auth-interceptor', 'ngFileUpload', 'ngCookies',
-				'ngSanitize', 'ui.router', 'ngAnimate', 'ui.bootstrap', 'ng.ueditor','ui-notification','tm.pagination'
+				'ngResource', 'smart-table', 'ui.tree', 'ngDialog', 'angular-loading-bar', 'http-auth-interceptor', 'angularFileUpload', 'ngCookies',
+				'ngSanitize', 'ui.router', 'ngAnimate', 'ui.bootstrap', 'ng.ueditor','ui-notification','tm.pagination',
+				'angular-bootstrap-select','ng.thumbnail'
 		]).config(function($stateProvider, $urlRouterProvider, $httpProvider){
 
 	$stateProvider
@@ -41,18 +42,18 @@ angular.module(
 		}
 		
 	})
-	.state('maincontent.detail', {
-		url : '/detail',
+	.state('maincontent.user-detail', {
+		url : '/user-detail',
 		views:{
 			'':{
 				templateUrl : 'views/user-detail.html',
-				controller : 'DetailCtrl',
-				controllerAs : 'detailCtrl'
+				controller : 'UserDetailCtrl',
+				controllerAs : 'userDetailCtrl'
 			}
 		}
 		
 	})
-	.state('maincontent.videomanager', {
+	.state('maincontent.video-manager', {
 		url : '/video',
 		views:{
 			'':{
@@ -63,13 +64,24 @@ angular.module(
 		}
 		
 	})
-	.state('maincontent.uploadvideo', {
+	.state('maincontent.video-upload', {
 		url : '/uploadvideo',
 		views:{
 			'':{
 				templateUrl : 'views/upload-video.html',
 				controller : 'VideoUploadCtrl',
 				controllerAs : 'videoUploadCtrl'
+			}
+		}
+		
+	})
+	.state('maincontent.video-detail', {
+		url : '/videodetail?:vId',
+		views:{
+			'':{
+				templateUrl : 'views/video-detail.html',
+				controller : 'VideoDetailCtrl',
+				controllerAs : 'videoDetailCtrl'
 			}
 		}
 		

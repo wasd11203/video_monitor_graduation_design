@@ -1,22 +1,104 @@
-	<!--
+
+<!--
      	作者：offline
      	时间：2017-05-08
      	描述：上传视频
      -->
-	<div class="row clearfix">
-		<div class="col-md-12 column">
+<div class="row clearfix" ng-init="init();">
+	<div class="col-md-12 column">
 
-			<div class="row clearfix">
-				<div class="col-md-12 column">
-					<span> 文件上传</span>
+		<form class="form-horizontal" role="form" ng-submit="createVideoAction();">
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="vTitle">视频标题</label>
+				<div class="col-sm-10">
+					<input type="text" ng-model="param.vTitle" class="form-control " id="vTitle" placeholder="请输入标题">
 				</div>
 			</div>
-			<div class="row clearfix">
-				<div class="col-md-12 column">
-					<span> 视频信息</span>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="vName">视频名称</label>
+				<div class="col-sm-10">
+					<input type="text" ng-model="param.vName" class="form-control" id="vName" placeholder="请输入名称">
 				</div>
 			</div>
-
-		</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="vIntroduce">视频介绍</label>
+				<div class="col-sm-10">
+					<input type="text" ng-model="param.vIntroduce" class="form-control" id="vIntroduce" placeholder="请输入视频介绍">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">选择视频归属类别</label>
+				<div class="col-sm-5">
+					<label class="col-sm-4 control-label" for="vTopId">一级类别</label>
+					<div class="col-sm-8">
+						<select selectpicker ng-model="vTopId" ng-change="changeSecList();" ng-options="top.vTopId as top.vTopName for top in nav">
+						  <option value="">请选择类别</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-5">
+					<label class="col-sm-4 control-label" for="vSecId">二级类别</label>
+					<div class="col-sm-8">
+						<select selectpicker ng-model="param.vSecId" ng-options="sec.vSecId as sec.vSecName for sec in top.secList">
+						  <option value="">请选择类别</option>
+						</select>
+					</div>
+				
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">视频展示图片</label> 
+				<div class="col-sm-10">
+					
+					<div class="col-sm-8 column">
+						<div class="col-sm-8 column">
+							<input type="file" nv-file-select="" uploader="videoImgUploader" multiple/>
+							<div class="progress" style="margin-bottom: 0;">
+								<div class="progress-bar" role="progressbar" ng-style="{ 'width': videoImgUploader.queue[0].progress + '%' }"></div>
+							</div>
+						</div>
+						<div class="col-sm-4 column">
+							<button type="button" class="btn btn-default" ng-click="remove(videoImgUploader);" ng-disabled="!videoImgUploader.queue[0]"> 移除 </button>
+							<button type="button" class="btn btn-default" ng-click="videoImgUploader.uploadAll();" ng-disabled="!videoImgUploader.getNotUploadedItems().length">确定上传</button>
+						</div>
+					</div>
+					
+					<div class="col-sm-4 column">
+						<div ng-repeat="item in videoImgUploader.queue" >
+							<div ng-thumb="{ file: item._file, width: 100, height: 100 }"></div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">视频文件</label> 
+				<div class="col-sm-10">
+					
+					<div class="col-sm-8 column">
+						<div class="col-sm-8 column">
+							<input type="file" nv-file-select="" uploader="videoUploader" multiple/>
+							<div class="progress" style="margin-bottom: 0;">
+								<div class="progress-bar" role="progressbar" ng-style="{ 'width': videoUploader.queue[0].progress + '%' }"></div>
+							</div>
+						</div>
+						<div class="col-sm-4 column">
+							<button type="button" class="btn btn-default" ng-click="remove(videoUploader);" ng-disabled="!videoUploader.queue[0]"> 移除 </button>
+							<button type="button" class="btn btn-default" ng-click="videoUploader.uploadAll();" ng-disabled="!videoUploader.getNotUploadedItems().length">确定上传</button>
+						</div>
+						
+					</div>
+					
+				</div>
+			</div>
+			
+			<button type="submit" class="btn btn-default">提交</button>
+		</form>
 
 	</div>
+
+</div>

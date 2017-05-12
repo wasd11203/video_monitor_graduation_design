@@ -56,6 +56,7 @@ public class ResourceServiceImpl implements ResourceService {
 		resource.setFabulousCounts(0);
 		resource.setPlayCounts(0);
 		resource.setDisComment(0);
+		resource.setInvalid(0);
 		int row = resourceMapper.insertResource(resource);
 		return row;
 	}

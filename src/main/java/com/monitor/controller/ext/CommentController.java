@@ -65,15 +65,27 @@ public class CommentController extends BasicController{
 		JSONObject jobj = new JSONObject();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		Integer id = new Integer(dcId);
-		Integer v = new Integer(vId);
-		Integer dc = new Integer(dcComment);
-		Integer del = new Integer(isDel);
-		Integer fab = new Integer(fabulousCounts);
+		Integer id = null;
+		Integer v = null;
+		Integer del = null;
+		Integer fab = null;
+		
+		if(dcId!= null && !dcId.trim().isEmpty()){
+			id = new Integer(dcId);
+		}
+		if(vId!= null && !vId.trim().isEmpty()){
+			v = new Integer(vId);
+		}
+		if(isDel!= null && !isDel.trim().isEmpty()){
+			del = new Integer(isDel);
+		}
+		if(fabulousCounts!= null && !fabulousCounts.trim().isEmpty()){
+			fab = new Integer(fabulousCounts);
+		}
 		
 		map.put("dcId", id);
 		map.put("vId", v);
-		map.put("dcComment", dc);
+		map.put("dcComment", dcComment);
 		map.put("isDel", del);
 		map.put("fabulousCounts", fab);
 		

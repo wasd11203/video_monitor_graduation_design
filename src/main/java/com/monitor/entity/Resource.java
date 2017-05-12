@@ -72,6 +72,11 @@ public class Resource implements Serializable{
 	 */
 	private String vSecName;
 	
+	/**
+	 * 上架下架标识
+	 */
+	private Integer invalid;
+	
 	public Resource(){
 		
 	}
@@ -172,6 +177,14 @@ public class Resource implements Serializable{
 		this.vSecName = vSecName;
 	}
 
+	public Integer getInvalid() {
+		return invalid;
+	}
+
+	public void setInvalid(Integer invalid) {
+		this.invalid = invalid;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -182,6 +195,7 @@ public class Resource implements Serializable{
 		int result = 1;
 		result = prime * result + ((disComment == null) ? 0 : disComment.hashCode());
 		result = prime * result + ((inTime == null) ? 0 : inTime.hashCode());
+		result = prime * result + ((invalid == null) ? 0 : invalid.hashCode());
 		result = prime * result + ((isDel == null) ? 0 : isDel.hashCode());
 		result = prime * result + ((vId == null) ? 0 : vId.hashCode());
 		result = prime * result + ((vIntroduce == null) ? 0 : vIntroduce.hashCode());
@@ -213,6 +227,11 @@ public class Resource implements Serializable{
 			if (other.inTime != null)
 				return false;
 		} else if (!inTime.equals(other.inTime))
+			return false;
+		if (invalid == null) {
+			if (other.invalid != null)
+				return false;
+		} else if (!invalid.equals(other.invalid))
 			return false;
 		if (isDel == null) {
 			if (other.isDel != null)
@@ -271,7 +290,7 @@ public class Resource implements Serializable{
 	public String toString() {
 		return "Resource [vId=" + vId + ", vTitle=" + vTitle + ", vName=" + vName + ", vPic=" + vPic + ", vIntroduce="
 				+ vIntroduce + ", inTime=" + inTime + ", isDel=" + isDel + ", disComment=" + disComment + ", vTopId="
-				+ vTopId + ", vTopName=" + vTopName + ", vSecId=" + vSecId + ", vSecName=" + vSecName + "]";
+				+ vTopId + ", vTopName=" + vTopName + ", vSecId=" + vSecId + ", vSecName=" + vSecName + ", invalid="
+				+ invalid + "]";
 	}
-	
 }

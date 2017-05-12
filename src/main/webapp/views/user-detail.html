@@ -17,12 +17,17 @@
 			<tbody>
 				<tr>
 					<td><label> 昵称： </label></td>
-					<td><span>AA</span></td>
+					<td><span ng-bind="user.mNickname">AA</span></td>
+
+				</tr>
+				<tr>
+					<td><label> 名字： </label></td>
+					<td><span ng-bind="user.mName">AA</span></td>
 
 				</tr>
 				<tr>
 					<td><label> 电话： </label></td>
-					<td><span>157*****679</span></td>
+					<td><span ng-bind="user.mPhone"></span></td>
 
 				</tr>
 
@@ -31,18 +36,48 @@
 
 	</div>
 	<div class="col-md-6 column">
-		<!--
+		<div class="row clearfix">
+			<!--
         	作者：offline
         	时间：2017-05-08
         	描述：头像
         -->
-		<div>
 			<div>
-				<img src="" width="40px;" height="40px;" alt="头像" />
+				<div>
+					<img ng-src="{{user.mPic}}" width="40px;" height="40px;" alt="头像" />
+				</div>
+				<button class="btn btn-default" ng-click="changeIcon();" ng-disabled="changeIconFlag">更换头像</button>
 			</div>
-			<button class="btn btn-default">上传头像</button>
+
+		</div>
+		
+		<div ng-if="changeIconFlag" class="row clearfix">
+			<div class="col-md-12 column">
+				<div class="row clearfix">
+					<div class="col-md-12 column">
+						<input type="file" nv-file-select="" uploader="uploader" multiple/>
+						<div class="progress" style="margin-bottom: 0;">
+							<div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.queue[0].progress + '%' }"></div>
+						</div>
+						<div ng-repeat="item in uploader.queue" >
+							<div ng-thumb="{ file: item._file, width: 100, height: 100 }"></div>
+							<button class="btn btn-default" ng-click="remove(uploader);"> 移除 </button>
+						</div>
+					</div>
+				</div>
+				<div class="row clearfix">
+					<div class="col-md-12 column">
+						<button type="button" class="btn btn-default" ng-click="uploader.uploadAll();" ng-disabled="!uploader.getNotUploadedItems().length">确定更换</button>
+						<button type="button" class="btn btn-default" ng-click="changeIcon();">取消</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div>
 
 </div>
+
+
+
+

@@ -15,6 +15,7 @@
 		<result column="V_TOP_NAME" property="vTopName"/>
 		<result column="V_SEC_ID" property="vSecId"/>
 		<result column="V_SEC_NAME" property="vSecName"/>
+		<result column="INVALID" property="invalid"/>
 	</resultMap>
 
 	<resultMap type="com.monitor.entity.ResourceDetail" id="RESOURCE_DETAIL_RESULT">
@@ -29,6 +30,7 @@
 		<result column="ISDEL" property="isDel"/>
 		<result column="DISCOMMENT" property="disComment"/>
 		<result column="INTIME" property="inTime"/>
+		<result column="INVALID" property="invalid"/>
 		
 		<result column="V_TOP_ID" property="vTopId" />
 		<result column="V_TOP_NAME" property="vTopName"/>
@@ -47,6 +49,7 @@
 			video.INTIME,
 			video.DISCOMMENT,
 			video.ISDEL,
+			video.INVALID,
 			
 			top.V_TOP_ID,
 			top.V_TOP_NAME,
@@ -126,6 +129,7 @@
 			video.ISDEL,
 			video.DISCOMMENT,
 			video.INTIME,
+			video.INVALID,
 			
 			top.V_TOP_ID,
 			top.V_TOP_NAME,
@@ -185,7 +189,10 @@
 				V_SEC_ID,
 			</if>
 			<if test="mId != null">
-				M_ID
+				M_ID,
+			</if>
+			<if test="invalid != null">
+				INVALID
 			</if>
 		</trim>
 		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
@@ -229,7 +236,10 @@
 				#{vSecId},
 			</if>
 			<if test="mId != null">
-				#{mId}
+				#{mId},
+			</if>
+			<if test="invalid != null">
+				#{invalid}
 			</if>
 		</trim>
 	</insert>
@@ -274,7 +284,10 @@
 				INTIME = #{inTime},
 			</if>
 			<if test="disComment != null">
-				DISCOMMENT = #{disComment}
+				DISCOMMENT = #{disComment},
+			</if>
+			<if test="invalid != null">
+				INVALID = #{invalid}
 			</if>
 		</trim>
 		<where>

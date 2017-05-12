@@ -94,21 +94,21 @@ public class ResourceController extends BasicController {
 										String vPic,String vIntroduce,String vPath,
 										String playCounts,String duration,String fabulousCounts,
 										String isDel,String vSecId,String mId,
-										String disComment){
+										String disComment,String invalid){
 		logger.info("更新视频信息：[{}],[{}],[{}],"
 					+ "[{}],[{}],[{}],"
 					+ "[{}],[{}],[{}],"
 					+ "[{}],[{}],[{}],"
-					+ "[{}]",
+					+ "[{}],[{}]",
 					vId,vTitle,vName,
 					vPic,vIntroduce,vPath,
 					playCounts,duration,fabulousCounts,
 					isDel,vSecId,mId,
-					disComment);
+					disComment,invalid);
 		JSONObject jobj = new JSONObject();
 		
 		Map<String, Object> map = transToMap(vId, vTitle, vName, vPic, vIntroduce, vPath, playCounts, duration, fabulousCounts, isDel, vSecId,
-				mId, disComment);
+				mId, disComment,invalid);
 		
 		int row = resourceService.updateResourceById(map);
 		jobj.put("code", 0);
@@ -148,7 +148,7 @@ public class ResourceController extends BasicController {
 	 */
 	protected Map<String, Object> transToMap(String vId, String vTitle, String vName, String vPic, String vIntroduce,
 			String vPath, String playCounts, String duration, String fabulousCounts, String isDel, String vSecId,
-			String mId, String disComment) {
+			String mId, String disComment,String invalid) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Integer id = null;
 		Integer play = null;
@@ -158,7 +158,8 @@ public class ResourceController extends BasicController {
 		Integer vSec = null;
 		Integer m = null;
 		Integer dis = null;
-
+		Integer inval = null;
+		
 		if (vId != null && !vId.trim().isEmpty()) {
 			id = new Integer(vId);
 		}
@@ -183,6 +184,10 @@ public class ResourceController extends BasicController {
 		if (disComment != null && !disComment.trim().isEmpty()) {
 			dis = new Integer(disComment);
 		}
+		if (invalid != null && !invalid.trim().isEmpty()) {
+			inval = new Integer(invalid);
+		}
+		
 		map.put("vId", id);
 		map.put("vTitle", vTitle);
 		map.put("vName", vName);
@@ -196,7 +201,8 @@ public class ResourceController extends BasicController {
 		map.put("vSecId", vSec);
 		map.put("mId", m);
 		map.put("disComment", dis);
-
+		map.put("invalid", inval);
+		
 		return map;
 	}
 

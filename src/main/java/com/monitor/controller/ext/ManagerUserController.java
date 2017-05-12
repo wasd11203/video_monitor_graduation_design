@@ -59,5 +59,5 @@ public class ManagerUserController extends BasicController {
 		
 		return jobj;
 	}
-	
+
 }

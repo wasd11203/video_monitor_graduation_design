@@ -1,0 +1,95 @@
+<div class="row clearfix" ng-init="loadVideoDetail();">
+	<div class="col-md-12 column">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>视频名称:</td>
+							<td colspan="5" ng-bind="video.vName"></td>
+						</tr>
+						<tr>
+							<td>视频标题:</td>
+							<td colspan="5" ng-bind="video.vTitle"></td>
+						</tr>
+						<tr>
+							<td>视频介绍:</td>
+							<td colspan="5" ng-bind="video.vIntroduce"></td>
+						</tr>
+						<tr>
+							<td>所属一级分类名称:</td>
+							<td colspan="2" ng-bind="video.vTopName"></td>
+							<td>所属二级分类名称:</td>
+							<td colspan="2" ng-bind="video.vSecName"></td>
+						</tr>
+						<tr>
+							<td>播放次数:</td>
+							<td ng-bind="video.playCounts"></td>
+							<td>点赞数:</td>
+							<td ng-bind="video.fabulousCounts"></td>
+							<td>上传时间:</td>
+							<td ng-bind="video.inTime"></td>
+						</tr>
+						<tr>
+							<td>是否允许评论(是/否)?:</td>
+							<td colspan="2">{{video.disComment == 1?'否':'是'}}</td>
+							<td>是否已下架(是/否)?:</td>
+							<td colspan="2">{{video.invalid == 1?'否':'是'}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="row clearfix">
+	<div class="col-md-6 column">
+		<button class="btn btn-default" ng-click="goBack();">&lt;-Back</button>
+	</div>
+
+	<div class="col-md-6 column">
+		<button class="btn btn-default" ng-click="loadCurPageCommentsAction();">查看评论</button>
+	</div>
+</div>
+
+<hr />
+<div ng-if="comments != null" class="row clearfix">
+	<div class="col-md-12 column">
+		<h3>视频相关评论：</h3>
+		<ul class="list-unstyled">
+			<li ng-repeat="comment in comments">
+				<div class="panel panel-default">
+				    <div class="panel-heading">
+				        <h3 class="panel-title">
+				            	<span>{{comment.vUser.vuNickname}}</span>
+				            	<button class="btn btn-danger" ng-click="updateCommentDelStatus(comment);">删除</button>
+				        </h3>
+				    </div>
+				    <div class="panel-body">
+				     		 {{comment.dcComment}}
+				    </div>
+				    <div class="panel-footer">
+				    		<button class="btn btn-primary">
+								<span class="glyphicon glyphicon-heart"></span>
+								<span class="badge" ng-bind="comment.fabulousCounts"></span>
+							</button>
+				    		<label class="label label-default pull-right">-- 发表时间:{{comment.dcIntime}}</label>
+				    </div>
+				</div>
+				<hr />
+			</li>
+			
+		</ul>
+	</div>
+	
+</div>
+<div ng-if="comments != null" class="row clearfix">
+	<div class="col-md-12 column">
+		<!-- 分页插件 -->
+		<tm-pagination conf="paginationConf"></tm-pagination>
+	</div>
+	
+</div>
+

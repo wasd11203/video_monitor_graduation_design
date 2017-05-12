@@ -16,10 +16,14 @@ import com.monitor.controller.BasicController;
 import com.monitor.util.file.service.IconService;
 
 @Controller
+@RequestMapping("/icon")
 public class IconController extends BasicController{
 
-	@Value("${uploadIconPath}")
+	@Value("${uploadPath}")
 	private String directory;
+	
+	@Value("${iconPath}")
+	private String iconPath;
 	
 	@Autowired
 	private IconService iconService;
@@ -27,11 +31,13 @@ public class IconController extends BasicController{
 	@RequestMapping("/upload")
 	@ResponseBody
 	public JSONObject upload(MultipartFile picFileMpf, HttpServletRequest req){
-		logger.debug("上传的文件为：[{}]",picFileMpf);
+		logger.debug("上传的文件为：[{}]",picFileMpf.getOriginalFilename());
 		String realPath = req.getSession().getServletContext().getRealPath("/");
 		realPath += File.separator+directory;
+		realPath += File.separator+iconPath;
 		JSONObject jobj = iconService.upload(picFileMpf, realPath);
-				
+		String fileName = (String) jobj.get("fileName");	
+		jobj.put("fileName", directory+iconPath+fileName);
 		return jobj;
 	}
 	

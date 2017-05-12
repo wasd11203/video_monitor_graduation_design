@@ -64,6 +64,11 @@ public class ResourceDetail implements Serializable{
 	private Date inTime;
 	
 	/**
+	 * 上架下架标识
+	 */
+	private Integer invalid;
+	
+	/**
 	 * 视频所属的一级菜单Id
 	 */
 	private Integer vTopId;
@@ -126,7 +131,7 @@ public class ResourceDetail implements Serializable{
 	public void setvIntroduce(String vIntroduce) {
 		this.vIntroduce = vIntroduce;
 	}
-	
+
 	public Integer getPlayCounts() {
 		return playCounts;
 	}
@@ -175,6 +180,14 @@ public class ResourceDetail implements Serializable{
 		this.inTime = inTime;
 	}
 
+	public Integer getInvalid() {
+		return invalid;
+	}
+
+	public void setInvalid(Integer invalid) {
+		this.invalid = invalid;
+	}
+
 	public Integer getvTopId() {
 		return vTopId;
 	}
@@ -219,6 +232,7 @@ public class ResourceDetail implements Serializable{
 		result = prime * result + ((duration == null) ? 0 : duration.hashCode());
 		result = prime * result + ((fabulousCounts == null) ? 0 : fabulousCounts.hashCode());
 		result = prime * result + ((inTime == null) ? 0 : inTime.hashCode());
+		result = prime * result + ((invalid == null) ? 0 : invalid.hashCode());
 		result = prime * result + ((isDel == null) ? 0 : isDel.hashCode());
 		result = prime * result + ((playCounts == null) ? 0 : playCounts.hashCode());
 		result = prime * result + ((vId == null) ? 0 : vId.hashCode());
@@ -261,6 +275,11 @@ public class ResourceDetail implements Serializable{
 			if (other.inTime != null)
 				return false;
 		} else if (!inTime.equals(other.inTime))
+			return false;
+		if (invalid == null) {
+			if (other.invalid != null)
+				return false;
+		} else if (!invalid.equals(other.invalid))
 			return false;
 		if (isDel == null) {
 			if (other.isDel != null)
@@ -325,8 +344,7 @@ public class ResourceDetail implements Serializable{
 		return "ResourceDetail [vId=" + vId + ", vTitle=" + vTitle + ", vName=" + vName + ", vPic=" + vPic
 				+ ", vIntroduce=" + vIntroduce + ", playCounts=" + playCounts + ", duration=" + duration
 				+ ", fabulousCounts=" + fabulousCounts + ", isDel=" + isDel + ", disComment=" + disComment + ", inTime="
-				+ inTime + ", vTopId=" + vTopId + ", vTopName=" + vTopName + ", vSecId=" + vSecId + ", vSecName="
-				+ vSecName + "]";
+				+ inTime + ", invalid=" + invalid + ", vTopId=" + vTopId + ", vTopName=" + vTopName + ", vSecId="
+				+ vSecId + ", vSecName=" + vSecName + "]";
 	}
-
 }
