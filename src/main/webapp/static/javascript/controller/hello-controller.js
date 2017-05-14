@@ -16,7 +16,7 @@ angular.module('monitor')
         ];
     	
     	$scope.init = function(){
-    		$scope.mNickname = user.mNickname;
+    		$scope.mNickname = $rootScope.user.mNickname;
     	}
 
     });

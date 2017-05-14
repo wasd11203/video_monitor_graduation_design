@@ -31,6 +31,20 @@ angular.module(
 		}
 		
 	})
+	.state('login', {
+		url : '/login',
+		views:{
+			'maincontent':{
+				templateUrl : 'views/login.html',
+				controller : 'LoginCtrl',
+				controllerAs : 'loginCtrl'
+			}
+		}
+		
+	})
+	/**
+	 * 欢迎页 路由配置
+	 */
 	.state('maincontent.hello', {
 		url : '/hello',
 		views:{
@@ -87,11 +101,30 @@ angular.module(
 		
 	});
 
-	$urlRouterProvider.otherwise('maincontent/hello');
+	$urlRouterProvider.otherwise('login');
 	$httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 })
 .config(function(NotificationProvider){
 	NotificationProvider.setOptions({
             maxCount:3
         });
-});
+}).run(['$rootScope', '$location' ,'$cookieStore', '$state','localStorage',  function($rootScope, $location, $cookieStore, $state,localStorage){
+	//监听路由事件
+
+    $rootScope.$on('$stateChangeStart',
+
+        function(event, toState, toParams, fromState, fromParams){
+
+    	if(!localStorage.getObject("user")|| !localStorage.getObject("user").mId ){
+    		if(toState.url != "/login"){
+    			event.preventDefault();
+				$state.go("login",{},[]);
+			}
+    	}else{
+    		$rootScope.user = localStorage.getObject("user");
+            
+    	}
+
+    })
+
+}]);;

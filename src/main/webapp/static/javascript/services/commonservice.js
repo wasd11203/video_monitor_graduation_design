@@ -55,9 +55,9 @@ angular.module('monitor')
             ignoreLoadingBar: true,
             headers : headers,
             ignoreAuthModule:true
-		}).success(function(res) {
+		}).then( function onSuccess(res)  {
 			deferred.resolve(res);
-		}).error(function(res) {
+		}).catch(function onError(res) {
 			deferred.reject(res);
 		});
 		return deferred.promise;

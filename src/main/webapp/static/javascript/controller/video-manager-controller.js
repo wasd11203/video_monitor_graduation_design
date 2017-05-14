@@ -17,7 +17,7 @@ angular.module('monitor')
     	
     	console.log("视频列表");
 
-    	$scope.param = {"mId":user.mId,"curPage":1};
+    	$scope.param = {"mId":$rootScope.user.mId,"curPage":1};
 
     	/**
 	     * 分页插件配置

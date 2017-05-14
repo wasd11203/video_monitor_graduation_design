@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.monitor.entity.ManagerUserDetail;
 import com.monitor.mapper.ManagerMapper;
-import com.monitor.security.entity.ManagerUser;
 import com.monitor.service.ManagerUserService;
 
 @Service("managerUserService")
@@ -26,11 +25,6 @@ public class ManagerUserServiceImpl implements ManagerUserService{
 	public int updateManagerUserInfoById(ManagerUserDetail manager) {
 		
 		return managerMapper.updateManagerUserInfoById(manager);
-	}
-
-	@Override
-	public ManagerUser loadManagerUserByNickname(Map<String, Object> map) {
-		return managerMapper.selectManagerUserByNickname(map);
 	}
 
 	@Override

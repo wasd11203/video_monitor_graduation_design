@@ -24,6 +24,12 @@ import com.alibaba.fastjson.JSONObject;
 //import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
 //import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 
+import com.taobao.api.ApiException;
+import com.taobao.api.DefaultTaobaoClient;
+import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
+import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -183,26 +189,26 @@ public class HttpUtil {
      * @return
      * @throws ApiException
      */
-//    public static JSONObject alihttpPost(String url,String appkey,String secret,String extend,String smsType,String receivePhone,String tempLateCode,String freeSignName,JSONObject jsonParams) throws ApiException{
-//    	
-//    	String params = JSON.toJSONString(jsonParams);
-//    	
-//    	TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
-//    	AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
-//    	req.setExtend( extend );
-//    	req.setSmsType( smsType );
-//    	req.setSmsFreeSignName( freeSignName );
-//    	req.setSmsParamString( params );
-//    	req.setRecNum( receivePhone );
-//    	req.setSmsTemplateCode( tempLateCode );
-//    	AlibabaAliqinFcSmsNumSendResponse rsp = null;
-//
-//		rsp = client.execute(req);
-//
-//		JSONObject jobj = new JSONObject();
-//		jobj = JSON.parseObject(rsp.getBody());
-//		
-//		return jobj;
-//    }
+    public static JSONObject alihttpPost(String url,String appkey,String secret,String extend,String smsType,String receivePhone,String tempLateCode,String freeSignName,JSONObject jsonParams) throws ApiException{
+    	
+    	String params = JSON.toJSONString(jsonParams);
+    	
+    	TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
+    	AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+    	req.setExtend( extend );
+    	req.setSmsType( smsType );
+    	req.setSmsFreeSignName( freeSignName );
+    	req.setSmsParamString( params );
+    	req.setRecNum( receivePhone );
+    	req.setSmsTemplateCode( tempLateCode );
+    	AlibabaAliqinFcSmsNumSendResponse rsp = null;
+
+		rsp = client.execute(req);
+
+		JSONObject jobj = new JSONObject();
+		jobj = JSON.parseObject(rsp.getBody());
+		
+		return jobj;
+    }
     
 }

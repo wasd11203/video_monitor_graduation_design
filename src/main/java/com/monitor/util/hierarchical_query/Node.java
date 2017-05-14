@@ -24,6 +24,40 @@ public class Node {
 	 */
 	private Integer sponsorId;
 	
-	
+	public Node(){
+		
+	}
+
+	public Integer getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(Integer commentId) {
+		this.commentId = commentId;
+	}
+
+	public Integer getTargetId() {
+		return targetId;
+	}
+
+	public void setTargetId(Integer targetId) {
+		this.targetId = targetId;
+	}
+
+	public String getCommnet() {
+		return commnet;
+	}
+
+	public void setCommnet(String commnet) {
+		this.commnet = commnet;
+	}
+
+	public Integer getSponsorId() {
+		return sponsorId;
+	}
+
+	public void setSponsorId(Integer sponsorId) {
+		this.sponsorId = sponsorId;
+	}
 	
 }

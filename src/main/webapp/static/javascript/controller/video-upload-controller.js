@@ -16,7 +16,7 @@ angular.module('monitor')
         ];
     	
 //    	console.log("上传视频");
-    	$scope.param = {"vTitle":'',"vName":'',"vPic":'',"vIntroduce":'',"vPath":'',"duration":"","vSecId":'',"mId":user.mId};
+    	$scope.param = {"vTitle":'',"vName":'',"vPic":'',"vIntroduce":'',"vPath":'',"duration":"","vSecId":'',"mId":$rootScope.user.mId};
     	
     	/**
     	 * 视频展示图片上传

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.monitor.controller.BasicController;
 import com.monitor.entity.ManagerUserDetail;
-import com.monitor.security.entity.ManagerUser;
 import com.monitor.service.ManagerUserService;
 
 /**
@@ -25,17 +24,6 @@ public class ManagerUserController extends BasicController {
 
 	@Autowired
 	private ManagerUserService managerUserService;
-	
-	@RequestMapping("/login")
-	@ResponseBody
-	public ManagerUser login(String username){
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("username", username);
-		ManagerUser user = managerUserService.loadManagerUserByNickname(map);
-		
-		return user;
-	}
 	
 	@RequestMapping("/detail")
 	@ResponseBody

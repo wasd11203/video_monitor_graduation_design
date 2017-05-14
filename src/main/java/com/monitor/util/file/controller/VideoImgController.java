@@ -25,6 +25,9 @@ public class VideoImgController extends BasicController{
 	@Value("${videoImgPath}")
 	private String videoImgPath;
 	
+	@Value("${front.server}")
+	private String toServer;
+	
 	@Autowired
 	private IconService iconService;
 	
@@ -39,7 +42,7 @@ public class VideoImgController extends BasicController{
 		
 		JSONObject jobj = iconService.upload(picFileMpf, realPath);
 		String fileName = (String) jobj.get("fileName");	
-		jobj.put("fileName", directory+videoImgPath+fileName);
+		jobj.put("fileName", toServer+directory+videoImgPath+fileName);
 		return jobj;
 	}
 	

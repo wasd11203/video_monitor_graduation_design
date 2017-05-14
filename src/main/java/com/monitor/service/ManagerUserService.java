@@ -3,7 +3,6 @@ package com.monitor.service;
 import java.util.Map;
 
 import com.monitor.entity.ManagerUserDetail;
-import com.monitor.security.entity.ManagerUser;
 
 /**
  * 管理者 信息  Service
@@ -25,13 +24,6 @@ public interface ManagerUserService {
 	 * @return
 	 */
 	public int updateManagerUserInfoById(ManagerUserDetail manager);
-	
-	/**
-	 * 根据用户名查找用户信息
-	 * @param map
-	 * @return
-	 */
-	public ManagerUser loadManagerUserByNickname(Map<String, Object> map);
 	
 	/**
 	 * 查看用户昵称是否被占用

@@ -18,7 +18,7 @@ angular.module('monitor')
     	$scope.param = {};
     	
     	$scope.init=function (){
-    		$scope.param.mId = user.mId;
+    		$scope.param.mId = $rootScope.user.mId;
     		console.log(user);
     	}
     	

@@ -16,10 +16,10 @@ angular.module('monitor')
         ];
     	
     	console.log("管理者详细信息");
-    	var param = {"mId":user.mId};
+    	var param = {"mId":$rootScope.user.mId};
     	
     	$scope.loadDetail = function(){
-    		var param = {"mId":user.mId}; 
+    		var param = {"mId":$rootScope.user.mId}; 
     		var url = "user/detail";
     		commonservice.postData(url,param).then(function(res){
     			console.info("当前用户详细信息",res.data);
@@ -58,6 +58,8 @@ angular.module('monitor')
     		commonservice.postData(url,param).then(function(res){
     			console.info("更新用户信息",res.data);
     			$scope.user = res.data;
+    			$rootScope.user.mNickname = $scope.user.mNickname;
+    			$rootScope.user.mPassword = $scope.user.mPassword;
     		},function(res){
     			alert(res.status);
     		});
