@@ -121,7 +121,7 @@
 
 	<!-- Package as an executable JAR -->
 	<build>
-		<finalName>manager</finalName>
+		<finalName>monitor</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
