@@ -25,8 +25,8 @@ public class IconController extends BasicController{
 	@Value("${iconPath}")
 	private String iconPath;
 	
-	@Value("${front.server}")
-	private String toServer;
+	@Value("${request.server}")
+	private String requestServer;
 	
 	@Autowired
 	private IconService iconService;
@@ -40,7 +40,7 @@ public class IconController extends BasicController{
 		realPath += File.separator+iconPath;
 		JSONObject jobj = iconService.upload(picFileMpf, realPath);
 		String fileName = (String) jobj.get("fileName");	
-		jobj.put("fileName", toServer+directory+iconPath+fileName);
+		jobj.put("fileName", requestServer+directory+iconPath+fileName);
 		return jobj;
 	}
 	

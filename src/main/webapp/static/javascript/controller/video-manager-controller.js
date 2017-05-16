@@ -46,6 +46,7 @@ angular.module('monitor')
     	 * 上下架操作
     	 */
     	$scope.updateValidStatus = function(video){
+    		$scope.updateVideoStatusParam = {'vId':'','isDel':'','disComment':'','invalid':''};
     		$scope.updateVideoStatusParam.vId = video.vId;
     		if(video.invalid == 1){
     			$scope.updateVideoStatusParam.invalid = 0;
@@ -63,6 +64,7 @@ angular.module('monitor')
     	 * 禁止评论与允许评论操作
     	 */
     	$scope.updateCommentStatus = function(video){
+    		$scope.updateVideoStatusParam = {'vId':'','isDel':'','disComment':'','invalid':''};
     		$scope.updateVideoStatusParam.vId = video.vId;
     		if(video.disComment == 1){
     			$scope.updateVideoStatusParam.disComment = 0;
@@ -80,6 +82,7 @@ angular.module('monitor')
     	 * 删除操作
     	 */
     	$scope.updateDelStatus = function(video){
+    		$scope.updateVideoStatusParam = {'vId':'','isDel':'','disComment':'','invalid':''};
     		$scope.updateVideoStatusParam.vId = video.vId;
     		if(video.isDel == 1){
     			$scope.updateVideoStatusParam.isDel = 0;
