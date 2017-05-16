@@ -15,6 +15,7 @@
 		<id column="M_ID" property="mId"/>
 		<result column="M_NICKNAME" property="mNickname"/>
 		<result column="M_PASSWORD" property="mPassword"/>
+		<result column="M_PHONE" property="mPhone"/>
 	</resultMap>
 
 	<select id="selectManagerUserDetailById" parameterType="Map" resultMap="MANAGER_DETAIL_RESULT">
@@ -65,7 +66,8 @@
 		SELECT
 			M_ID,
 			M_NICKNAME,
-			M_PASSWORD
+			M_PASSWORD,
+			M_PHONE
 		FROM
 			v_manager
 		<where>

@@ -13,7 +13,7 @@ angular.module(
 		[
 				'ngResource', 'smart-table', 'ui.tree', 'ngDialog', 'angular-loading-bar', 'http-auth-interceptor', 'angularFileUpload', 'ngCookies',
 				'ngSanitize', 'ui.router', 'ngAnimate', 'ui.bootstrap', 'ng.ueditor','ui-notification','tm.pagination',
-				'angular-bootstrap-select','ng.thumbnail'
+				'angular-bootstrap-select','ng.thumbnail','aa','bb'
 		]).config(function($stateProvider, $urlRouterProvider, $httpProvider){
 
 	$stateProvider

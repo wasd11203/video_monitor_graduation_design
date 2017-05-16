@@ -6,7 +6,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.monitor.controller.BasicController;
 import com.monitor.security.entity.ManagerUser;
 import com.monitor.security.entity.ManagerUserInfoDetails;
-import com.monitor.security.service.UserService;
 import com.monitor.util.http.HttpUtil;
 import com.monitor.util.random.RandomNum;
 import com.taobao.api.ApiException;
@@ -26,9 +24,6 @@ import com.taobao.api.ApiException;
 @RequestMapping("/account")
 public class AccountController extends BasicController{
 
-	@Autowired
-	private UserService userService;
-	
 	@Value("${char.source.pool}")
 	private String sourcePool;
 	
@@ -88,30 +83,62 @@ public class AccountController extends BasicController{
 		return jobj;
 	}
 	
-	@RequestMapping("/sendVerfiyCode")
+	@RequestMapping("/send")
 	@ResponseBody
-	public JSONObject sendVerfiyCode(String phone,HttpServletRequest req,HttpServletResponse res){
+	public JSONObject sendVerfiyCode(String mPhone,HttpServletRequest req,HttpServletResponse res){
 		
 		String code = RandomNum.randomCheckCode(sourcePool);
-		Cookie cookie = new Cookie(phone, code);
+		Cookie cookie = new Cookie(mPhone, code);
 		// 60S 内有效
 		cookie.setMaxAge(60);
 		res.addCookie(cookie);
-		logger.debug("CONTROLLER-- 向号码:[{}]发送验证码:[{}]",phone,code);
+		logger.debug("CONTROLLER-- 向号码:[{}]发送验证码:[{}]",mPhone,code);
 		
 		JSONObject resJson = null;
 		JSONObject param = new JSONObject();
-		param.put("phone", phone);
+		param.put("phone", mPhone);
 		param.put("code", code);
 		
 		try {
-			resJson = HttpUtil.alihttpPost(url, appkey, secret, extend, smsType, phone, tempLateCode, freeSignName, param);
+			resJson = HttpUtil.alihttpPost(url, appkey, secret, extend, smsType, mPhone, tempLateCode, freeSignName, param);
 		} catch (ApiException e) {
 			
 			e.printStackTrace();
 		}
 		
 		return resJson;
+	}
+	
+	@RequestMapping("/check")
+	@ResponseBody
+	public JSONObject checkVerfiyCode(String mPhone,String verifyCode,HttpServletRequest req){
+		JSONObject jobj = new JSONObject();
+		Cookie[] cookies = req.getCookies();
+		String realCode = null ; 
+		
+		if(cookies != null){
+			for(Cookie cookie : cookies){
+				if(cookie.getName().equals(mPhone)){
+					realCode = cookie.getValue();
+				}
+			}
+		}
+		
+		if(realCode != null){
+			if(!realCode.equals(verifyCode.trim())){
+				jobj.put("code", 3);
+				jobj.put("msg", "验证码错误");
+				
+			}else{
+				jobj.put("code", 0);
+			}
+			
+		}else{
+			jobj.put("code", 2);
+			jobj.put("msg", "验证码可能已经失效");
+		}
+		
+		return jobj;
 	}
 	
 }

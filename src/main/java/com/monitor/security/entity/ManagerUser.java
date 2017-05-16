@@ -14,6 +14,7 @@ public class ManagerUser implements Serializable{
 	private Integer mId;
 	private String mNickname;
 	private String mPassword;
+	private String mPhone;
 	
 	public ManagerUser(){
 		
@@ -43,6 +44,14 @@ public class ManagerUser implements Serializable{
 		this.mPassword = mPassword;
 	}
 
+	public String getmPhone() {
+		return mPhone;
+	}
+
+	public void setmPhone(String mPhone) {
+		this.mPhone = mPhone;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -54,6 +63,7 @@ public class ManagerUser implements Serializable{
 		result = prime * result + ((mId == null) ? 0 : mId.hashCode());
 		result = prime * result + ((mNickname == null) ? 0 : mNickname.hashCode());
 		result = prime * result + ((mPassword == null) ? 0 : mPassword.hashCode());
+		result = prime * result + ((mPhone == null) ? 0 : mPhone.hashCode());
 		return result;
 	}
 
@@ -81,12 +91,17 @@ public class ManagerUser implements Serializable{
 				return false;
 		} else if (!mPassword.equals(other.mPassword))
 			return false;
+		if (mPhone == null) {
+			if (other.mPhone != null)
+				return false;
+		} else if (!mPhone.equals(other.mPhone))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ManagerUser [mId=" + mId + ", mNickname=" + mNickname + ", mPassword=" + mPassword + "]";
+		return "ManagerUser [mId=" + mId + ", mNickname=" + mNickname + ", mPassword=" + mPassword + ", mPhone="
+				+ mPhone + "]";
 	}
-	
 }

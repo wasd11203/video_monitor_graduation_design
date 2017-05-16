@@ -1,0 +1,22 @@
+.ov{
+	overflow:hidden;
+	position: relative;
+	height:150px;
+}
+
+.slide ,.slide2{
+	position: absolute; 
+	top:0px;
+}
+
+.slide.ng-enter { transition:1s linear all; }
+
+.slide.ng-leave {
+  transition:1s linear all; 
+}
+
+.slide2.ng-enter { transition:1s linear all; }
+
+.slide2.ng-leave {
+  transition:1s linear all; 
+}
