@@ -76,9 +76,6 @@ angular.module('monitor')
     		}
     		$scope.updateCommentAction(param);
     		
-    		$scope.commmentParam.curPage = 1;
-    		$scope.loadCurPageCommentsAction();
-    		
     		return false;
     	}
     	
@@ -86,6 +83,8 @@ angular.module('monitor')
     		var url = "comment/update";
     		commonservice.postData(url,param).then(function(res){
     			console.info("更新评论结果",res.data);
+    			$scope.commmentParam.curPage = 1;
+        		$scope.loadCurPageCommentsAction();
     		},function(res){
     			alert(res.status);
     		});
