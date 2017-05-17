@@ -75,7 +75,7 @@ angular.module('monitor')
 //          console.info('onCompleteItem', response);
 //          $scope.img = response.fileName;
         	$scope.user.mPic = response.fileName;
-          var param = {"mId":$scope.user.mPic.mId,"mPic":$scope.user.mPic};
+          var param = {"mId":$scope.user.mId,"mPic":$scope.user.mPic};
           $scope.updateUserDetailAction(param);
 //          uploader.clearQueue() ;
         };
