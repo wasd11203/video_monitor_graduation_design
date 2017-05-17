@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-	<!--<property name="LOG_HOME" value="/yjdata/www/www/manager/logs/" />-->
+	<!--<property name="LOG_HOME" value="/yjdata/www/www/monitor/logs/" />-->
 	 <property name="LOG_HOME" value="logs/" />  
 	
     <!-- 控制台设置 -->
