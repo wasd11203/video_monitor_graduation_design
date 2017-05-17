@@ -29,7 +29,7 @@ angular.module('monitor').controller('LoginCtrl',
 			 */
 			$scope.verify = {
 					"verifyCode" : "",
-					"phone":""
+					"mPhone":""
 				};
 			
 			$scope.toLogin = function(){
@@ -38,7 +38,7 @@ angular.module('monitor').controller('LoginCtrl',
 				commonservice.auth(url, param).then(function(response) {
 					localStorage.setObject("user",response.data.user);
 					$scope.bool = !$scope.bool;
-					$scope.verify.phone = response.data.user.mPhone;
+					$scope.verify.mPhone = response.data.user.mPhone;
 					
 //					$state.go("maincontent.hello",{},[]);
 				}, function(response) {
@@ -80,7 +80,7 @@ angular.module('monitor').controller('LoginCtrl',
 				}
 				
 				var url = "account/send";
-				var param = {"mPhone":$scope.verify.phone};
+				var param = {"mPhone":$scope.verify.mPhone};
 				commonservice.postData(url, param).then(function(response) {
 					
 					console.log(response);

@@ -123,7 +123,7 @@ public class AccountController extends BasicController{
 				}
 			}
 		}
-		
+		logger.debug("CONTROLLER-- 号码:[{}],提交验证码:[{}],对应验证码:[{}]",mPhone,verifyCode,realCode);
 		if(realCode != null){
 			if(!realCode.equals(verifyCode.trim())){
 				jobj.put("code", 3);

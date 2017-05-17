@@ -19,7 +19,7 @@ angular.module('monitor')
     	
     	$scope.init=function (){
     		$scope.param.mId = $rootScope.user.mId;
-    		console.log(user);
+//    		console.log(user);
     	}
     	
     	$scope.go =function(toState){
