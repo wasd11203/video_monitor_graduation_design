@@ -57,9 +57,7 @@ angular.module('monitor')
     		var url = "user/update";
     		commonservice.postData(url,param).then(function(res){
     			console.info("更新用户信息",res.data);
-    			$scope.user = res.data;
-    			$rootScope.user.mNickname = $scope.user.mNickname;
-    			$rootScope.user.mPassword = $scope.user.mPassword;
+    			$scope.user.mPic = param.mPic;
     		},function(res){
     			alert(res.status);
     		});
@@ -74,8 +72,7 @@ angular.module('monitor')
         $scope.uploader.onCompleteItem = function(fileItem, response, status, headers) {
 //          console.info('onCompleteItem', response);
 //          $scope.img = response.fileName;
-        	$scope.user.mPic = response.fileName;
-          var param = {"mId":$scope.user.mId,"mPic":$scope.user.mPic};
+          var param = {"mId":$scope.user.mId,"mPic":response.fileName};
           $scope.updateUserDetailAction(param);
 //          uploader.clearQueue() ;
         };

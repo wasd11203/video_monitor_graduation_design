@@ -17,12 +17,12 @@
 			<tbody>
 				<tr>
 					<td><label> 昵称： </label></td>
-					<td><span ng-bind="user.mNickname">AA</span></td>
+					<td><span ng-bind="user.mNickname"></span></td>
 
 				</tr>
 				<tr>
 					<td><label> 名字： </label></td>
-					<td><span ng-bind="user.mName">AA</span></td>
+					<td><span ng-bind="user.mName"></span></td>
 
 				</tr>
 				<tr>
@@ -68,7 +68,7 @@
 				<div class="row clearfix">
 					<div class="col-md-12 column">
 						<button type="button" class="btn btn-default" ng-click="uploader.uploadAll();" ng-disabled="!uploader.getNotUploadedItems().length">确定更换</button>
-						<button type="button" class="btn btn-default" ng-click="changeIcon();">取消</button>
+						<button type="button" class="btn btn-default" ng-click="changeIcon();">收起/取消</button>
 					</div>
 				</div>
 			</div>

@@ -140,6 +140,8 @@ angular.module('monitor').controller('LoginCtrl',
 					"password" : ""
 				};
 				
+				$scope.errMsg = null;
+				
 				$scope.verify = {
 					"verifyCode" : "",
 					"phone":""
