@@ -10,33 +10,18 @@ angular.module('monitor').controller('LoginCtrl',
 			this.awesomeThings = [ 'HTML5 Boilerplate', 'AngularJS', 'Karma' ];
 
 			/**
-			 * 验证码相关配置
-			 */
-			$scope.remain = "发送验证码";
-			var counts = 60;
-			var timer = null;
-			
-			/**
-			 * 用户验证时向后台发送请求时携带参数
+			 * 用户登陆
 			 */
 			$scope.param = {
 					"username" : "",
 					"password" : ""
 				};
-			
-			/**
-			 * 发送 校验验证码 时携带参数
-			 */
-			$scope.verify = {
-					"verifyCode" : "",
-					"mPhone":""
-				};
-			
 			$scope.toLogin = function(){
 				var url = "account/login";
 				var param = $scope.param;
 				commonservice.auth(url, param).then(function(response) {
-					localStorage.setObject("user",response.data.user);
+					localStorage.setObject("temp",response.data.user);
+					
 					$scope.bool = !$scope.bool;
 					$scope.verify.mPhone = response.data.user.mPhone;
 					
@@ -53,6 +38,9 @@ angular.module('monitor').controller('LoginCtrl',
 			 * 创建一个定时器
 			 * @returns
 			 */
+			$scope.remain = "发送验证码";
+			var counts = 60;
+			var timer = null;
 			function createInterval (){
 				$scope.disBtn = true;
 				timer = $interval( function() {
@@ -71,8 +59,12 @@ angular.module('monitor').controller('LoginCtrl',
 			}
 			
 			/**
-			 * 告知后台发送验证码
+			 * 发送验证码
 			 */
+			$scope.verify = {
+					"verifyCode" : "",
+					"mPhone":""
+				};
 			$scope.toSendVerifyCode = function(){
 				
 				if(!timer){
@@ -81,11 +73,28 @@ angular.module('monitor').controller('LoginCtrl',
 				
 				var url = "account/send";
 				var param = {"mPhone":$scope.verify.mPhone};
-				commonservice.postData(url, param).then(function(response) {
-					
-					console.log(response);
+				commonservice.postData(url, param).then(function(res) {
+					console.log(res);
+					if(res.data.alibaba_aliqin_fc_sms_num_send_response){
+	    				$scope.errMsg = null;
+	    			}else{
+	    				if(timer){
+	  	       	    		 $scope.disBtn = false;
+	  	       	    		 $scope.btnContent = '发送验证码';
+	  	       	    		 $interval.cancel(timer);
+	  	       	    		 timer = null;
+	  	       	    	 }
+	    				$scope.errMsg = "验证码发送失败";
+	    			}
 				}, function(response) {
-					alert("失败");
+//					alert("失败");
+					$scope.errMsg = "请重试";
+	    			if(timer){
+	       	    		 $scope.disBtn = false;
+	       	    		 $scope.btnContent = '发送验证码';
+	       	    		 $interval.cancel(timer);
+	       	    		 timer = null;
+	       	    	 }
 				});
 			}
 			
@@ -97,6 +106,9 @@ angular.module('monitor').controller('LoginCtrl',
 				var param = $scope.verify;
 				commonservice.postData(url, param).then(function(response) {
 					if(response.data.code == 0){
+						
+						localStorage.setObject("user",localStorage.getObject("temp"));
+						
 						$state.go("maincontent.hello",{},[]);
 						
 						if(!timer){
