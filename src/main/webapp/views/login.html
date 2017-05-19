@@ -1,53 +1,72 @@
 <div class="row clearfix">
-	<div class="col-md-6 column"></div>
-	<div class="col-md-6 column ov">
+	<div class="col-xs-4 col-xs-offset-4 column ov">
 
-		<div ng-if="!bool" class="col-md-12 colum slide">
+		<div ng-if="!bool" class="col-md-12 colum slide jumbotron">
+			
+			<P>微show---管理者平台</P>
+			
 			<form class="form-horizontal" role="form" ng-submit="toLogin();">
-				<div class="form-group">
-					<div class="col-sm-10">
+				<div class="form-group has-feedback">
+					<div class="col-sm-12">
 						<input type="text" ng-model="param.username" required class="form-control"
-							placeholder="请输入昵称">
+							placeholder="用户名">
+						<span class="glyphicon glyphicon-user form-control-feedback"></span>
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-10">
+				<div class="form-group has-feedback">
+					<div class="col-sm-12">
 						<input type="password" ng-model="param.password" required
-							class="form-control" placeholder="请输入密码 ">
+							class="form-control" placeholder="密码">
+						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-10">
-						<button type="submit" class="btn btn-default">登录</button>
+					<div class="col-sm-12">
+						<button type="submit" class="btn btn-primary col-sm-12">登录 </button>
 					</div>
 				</div>
 			</form>
 		</div>
 
-		<div ng-if="bool" class="col-md-12 colum slide2">
+		<div ng-if="bool" class="col-md-12 colum slide2 jumbotron">
+			
+			<div style="position: absolute;top: 0px;left: 0;">
+				<button type="button" class="btn btn-link" ng-click="backToLogin();">
+					<span class="glyphicon glyphicon-arrow-left"></span>
+					返回
+				</button>
+			</div>
+			
+			<P>管理员手机验证</P>
+			
 			<form class="form-horizontal" role="form" ng-submit="toCheckVerifyCode();">
 				<div class="form-group">
-					<div class="col-sm-6 column">
-						<input type="text" ng-model="verify.verifyCode" class="form-control" required
+				
+					<div class="input-group">
+	                    <input type="text" ng-model="verify.verifyCode" class="form-control" required
 							placeholder="请输入验证码">
-					</div>
-					<div class="col-sm-6 column">
-						<button class="btn btn-default" ng-click="toSendVerifyCode();" ng-disabled="disBtn" ng-bind="remain"></button>
-					</div>
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-default" ng-click="toSendVerifyCode();" ng-disabled="disBtn" ng-bind="remain"></button>
+	                    </span>
+	                </div>
+
 				</div>
 				<div class="form-group">
-					<div class="col-sm-10">
-						<button type="button" class="btn btn-default" ng-click="backToLogin();">返回</button>
-						<button type="submit" class="btn btn-default" >确认</button>
-						<label ng-if="errMsg" class="label label-danger" ng-bind="errMsg"></label>
-					</div>
+					<button type="submit" class="btn btn-success col-md-12 colum pull-right" >
+						确认
+						<span class="glyphicon glyphicon-arrow-right"></span>
+					</button>
+					<label ng-if="errMsg" class="label label-danger" ng-bind="errMsg"></label>
 				</div>
 			</form>
 		</div>
-
+	
+	</div>
+	
+	<div class="bg">
+		<img class="img-responsive" src="static/images/bg.jpg" />
 	</div>
 </div>
-
 
 
 

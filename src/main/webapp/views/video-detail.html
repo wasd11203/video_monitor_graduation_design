@@ -1,4 +1,4 @@
-<div class="row clearfix" ng-init="loadVideoDetail();">
+<div class="row clearfix jumbotron" ng-init="loadVideoDetail();">
 	<div class="col-md-12 column">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
@@ -28,7 +28,7 @@
 							<td>点赞数:</td>
 							<td ng-bind="video.fabulousCounts"></td>
 							<td>上传时间:</td>
-							<td ng-bind="video.inTime"></td>
+							<td >{{ video.inTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
 						</tr>
 						<tr>
 							<td>是否允许评论(是/否)?:</td>
@@ -75,7 +75,7 @@
 								<span class="glyphicon glyphicon-heart"></span>
 								<span class="badge" ng-bind="comment.fabulousCounts"></span>
 							</button>
-				    		<label class="label label-default pull-right">-- 发表时间:{{comment.dcIntime}}</label>
+				    		<label class="label label-default pull-right">-- 发表时间:{{comment.dcIntime | date:'yyyy-MM-dd hh:mm:ss'}}</label>
 				    </div>
 				</div>
 				<hr />

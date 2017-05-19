@@ -1,41 +1,58 @@
 
-<div class="row clearfix">
+<div class="row clearfix header">
 	<div class="col-md-9 column">
-		LOGO
+		<a ui-sref="maincontent.hello"><img src="static/images/logo.png"></a>
 	</div>
 	<div class="col-md-3 column">
-		<a href="" ng-bind="user.mNickname">  </a>
-		<button class="btn btn-default" ng-click="logout();">注销</button>
+		<a ui-sref="maincontent.user-detail">
+			<img src="static/images/logo.png">
+			<span class="lable label-success" ng-bind="user.mNickname"></span>
+		 </a>
+		<button class="btn btn-warning" ng-click="logout();">
+			<span class="glyphicon glyphicon-off"></span>
+			注销
+		</button>
 	</div>
 </div>
 
 <div class="row clearfix">
 
-	<div class="col-md-3 column">
+	<div class="col-md-2 column">
 	
 		<div class="panel-group" id="accordion" ng-controller="navCtrl" ng-init="init();">
 	
-			<div class="panel panel-default">
+			<div class="panel panel-success">
 				<div class="panel-heading">
 					<h4 class="panel-title">
 						<a data-toggle="collapse" data-parent="#accordion"
-							data-target="#collapse-0" href="javascript:void(0);"> 个人设置 </a>
+							data-target="#collapse-0" href="javascript:void(0);">
+							<span class="glyphicon glyphicon-cog"></span>
+							 个人设置
+						</a>
 					</h4>
 				</div>
 				<div id="collapse-0" class="panel-collapse collapse in">
 					<div class="panel-body">
 						<ul class="list-unstyled">
-							<li ng-click="go('maincontent.user-detail');"><a href="">个人详细信息</a></li>
+							<li ng-click="go('maincontent.user-detail');">
+								<a href="">
+									<span class=""></span>
+									个人详细信息
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
 			</div>
 	
-			<div class="panel panel-default">
+			<div class="panel panel-success">
 				<div class="panel-heading">
 					<h4 class="panel-title">
 						<a data-toggle="collapse" data-parent="#accordion"
-							data-target="#collapse-1" href="javascript:void(0);"> 视频管理 </a>
+							data-target="#collapse-1" href="javascript:void(0);">
+							<span class="glyphicon glyphicon-film"></span>
+							 视频管理 
+						</a>
 					</h4>
 				</div>
 				<div id="collapse-1" class="panel-collapse collapse">
@@ -51,8 +68,17 @@
 	
 	</div>
 	
-	<div class="col-md-9 column" ui-view="">
+	<div class="col-md-10 column" ui-view="">
 		
 	</div>
 </div>
+
+<!-- footer -->
+<div class="row clearfix">
+	<div class="col-md-12 column">
+		<label class="label label-default center-block">@copyright
+		2017-05-01</label>
+	</div>
+</div>
+<!-- //footer -->
 

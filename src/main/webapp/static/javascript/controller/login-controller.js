@@ -102,18 +102,26 @@ angular.module('monitor').controller('LoginCtrl',
 			 * 校验验证码
 			 */
 			$scope.toCheckVerifyCode = function(){
+				
+				if($scope.errMsg){
+					console.log("存在错误无法提交");
+					return false;
+				}
 				var url = "account/check";
 				var param = $scope.verify;
 				commonservice.postData(url, param).then(function(response) {
 					if(response.data.code == 0){
 						
+						if(timer){
+		       	    		 $scope.disBtn = false;
+		       	    		 $scope.btnContent = '发送验证码';
+		       	    		 $interval.cancel(timer);
+		       	    		 timer = null;
+		       	    	 }
+						
 						localStorage.setObject("user",localStorage.getObject("temp"));
 						
 						$state.go("maincontent.hello",{},[]);
-						
-						if(!timer){
-							createInterval();
-						}
 						
 					}else{
 						alert("验证码错误");
